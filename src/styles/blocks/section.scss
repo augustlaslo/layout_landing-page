@@ -1,0 +1,41 @@
+@use '../utils/mixins' as *;
+
+// Вертикальний ритм із макета:
+// між секціями 64 / 120 / 120, від заголовка до контенту 48 / 56 / 56.
+.section {
+  padding-block-start: 64px;
+  scroll-margin-top: 0;
+
+  @include on-tablet {
+    padding-block-start: 120px;
+  }
+
+  &--last {
+    padding-block-end: 64px;
+
+    @include on-tablet {
+      padding-block-end: 120px;
+    }
+  }
+
+  &__title {
+    margin: 0 0 48px;
+
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 32px;
+
+    @include on-tablet {
+      max-width: 496px;
+      margin-bottom: 56px;
+      font-size: 40px;
+      line-height: 40px;
+    }
+
+    @include on-desktop {
+      max-width: 585px;
+      font-size: 48px;
+      line-height: 48px;
+    }
+  }
+}

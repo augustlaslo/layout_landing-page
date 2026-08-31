@@ -1,0 +1,45 @@
+@use '../utils/mixins' as *;
+@use '../utils/vars' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  color: $button-text-color;
+  text-decoration: none;
+  letter-spacing: 1px;
+
+  background-color: $button-background;
+  cursor: pointer;
+
+  transition:
+    color $transition-duration,
+    background-color $transition-duration;
+
+  &:hover {
+    color: $button-hover-text-color;
+    background-color: $button-hover-background;
+  }
+
+  &:active {
+    color: $button-text-color;
+    background-color: $button-active-background;
+  }
+
+  // У макеті кнопка під категоріями — 324px (4 колонки) на десктопі
+  &--narrow {
+    @include on-desktop {
+      max-width: 324px;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@use '../utils/mixins' as *;
+
+.about {
+  &__image {
+    height: 200px;
+    margin-bottom: 48px;
+
+    background-image: url('../images/about-bg.webp');
+    background-position: center;
+    background-size: cover;
+
+    @include on-tablet {
+      height: 400px;
+      margin-bottom: 56px;
+    }
+
+    @include on-desktop {
+      height: 460px;
+    }
+  }
+
+  &__title {
+    @include on-tablet {
+      margin-bottom: 0;
+    }
+  }
+
+  &__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 22px;
+
+    @include reveal-on-scroll;
+  }
+}

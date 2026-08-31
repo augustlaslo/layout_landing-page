@@ -1,0 +1,22 @@
+// Colors
+$main-text-color: #292929;
+$page-background-color: #fff;
+$menu-background-color: #e5e6e8;
+$accent-text-color: #8a8a8a;
+
+// Button
+$button-background: #292929;
+$button-text-color: #fff;
+$button-hover-background: #f6f6f6;
+$button-hover-text-color: #292929;
+$button-active-background: #000;
+
+// Form fields
+$field-background: #f1f2f4;
+$field-border-color: #d5d7da;
+$field-placeholder-color: #8a8a8a;
+
+// Motion
+// Одна швидкість на весь лендінг — чеклист 9 / вимога 7.
+// Ніде не хардкодити 0.3s, тільки через цю змінну.
+$transition-duration: 0.3s;

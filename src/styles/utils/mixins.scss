@@ -1,0 +1,93 @@
+@use 'vars' as *;
+
+// Breakpoints — з макета: 320 / 744 / 1260
+$tablet-min-width: 744px;
+$desktop-min-width: 1260px;
+
+// Бокові поля контенту на кожному брейкпоінті
+$content-padding-inline-mobile: 20px;
+$content-padding-inline-tablet: 72px;
+$content-padding-inline-desktop: 120px;
+
+// 1020 контенту + 2 x 120 полів
+$page-max-width: 1260px;
+
+@mixin on-tablet {
+  @media (min-width: $tablet-min-width) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: $desktop-min-width) {
+    @content;
+  }
+}
+
+@mixin content-padding-inline {
+  padding-inline: $content-padding-inline-mobile;
+
+  @include on-tablet {
+    padding-inline: $content-padding-inline-tablet;
+  }
+
+  @include on-desktop {
+    padding-inline: $content-padding-inline-desktop;
+  }
+}
+
+@mixin hover-scale($scale: 1.2, $duration: $transition-duration) {
+  transition: transform $duration;
+
+  &:hover {
+    transform: scale($scale);
+  }
+}
+
+// Збільшення фото на ховер без горизонтального скролу:
+// обгортка обрізає, збільшується внутрішній елемент.
+// Чеклист 7 без порушення чеклиста 8.
+@mixin zoom-frame {
+  display: block;
+  overflow: hidden;
+
+  > img {
+    display: block;
+    width: 100%;
+    transition: transform $transition-duration;
+  }
+
+  &:hover > img {
+    transform: scale(1.2);
+  }
+}
+
+// Виїзд блоків при скролі без JS.
+// opacity: 0 живе ТІЛЬКИ всередині @keyframes — інакше в браузерах
+// без scroll-driven animations (Firefox) контент лишиться невидимим назавжди.
+@keyframes reveal-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@mixin reveal-on-scroll {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      // Тільки лонгхенди: шорхенд animation скидає animation-timeline.
+      animation-name: reveal-up;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view();
+
+      // Однорідний діапазон: швидкість появи не залежить від висоти блока.
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}

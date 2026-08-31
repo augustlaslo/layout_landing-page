@@ -1,0 +1,66 @@
+@use '../utils/vars' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Непрозорий фон обовʼязковий: без нього sticky-футер із z-index: -1
+// просвічуватиме крізь усю сторінку (чеклист 16).
+.main {
+  position: relative;
+  background-color: $page-background-color;
+}
+
+.page {
+  scroll-behavior: smooth;
+
+  // Резервує місце під смугу прокрутки, щоб контент не смикався
+  // на 15px, коли меню вимикає скрол сторінки.
+  scrollbar-gutter: stable;
+
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+  color: $main-text-color;
+
+  // Чеклист 11 — не скролити сторінку під відкритим меню
+  &:has(.page__menu:target) {
+    overflow: hidden;
+  }
+
+  &__body {
+    margin: 0;
+  }
+
+  &__menu {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+
+    // visibility, а не тільки opacity: інакше приховане меню
+    // лишається в порядку табуляції і фокус їде в нікуди.
+    visibility: hidden;
+    opacity: 0;
+
+    transition:
+      opacity $transition-duration,
+      visibility $transition-duration;
+
+    &:target {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page {
+    scroll-behavior: auto;
+  }
+}
