@@ -1,0 +1,55 @@
+@use '../utils/mixins' as *;
+
+// Сітка макета: 2 / 6 / 12 колонок
+// 320:  2 x 130 + 20        = 280
+// 744:  6 x 80  + 5 x 24    = 600
+// 1260: 12 x 63 + 11 x 24   = 1020
+.container {
+  max-width: $page-max-width;
+  margin-inline: auto;
+
+  @include content-padding-inline;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+
+  @include on-tablet {
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 24px;
+  }
+
+  @include on-desktop {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+@for $start from 1 through 2 {
+  @for $end from $start through 2 {
+    .grid__item--mobile-#{$start}-#{$end} {
+      grid-column: #{$start} / #{$end + 1};
+    }
+  }
+}
+
+@include on-tablet {
+  @for $start from 1 through 6 {
+    @for $end from $start through 6 {
+      .grid__item--tablet-#{$start}-#{$end} {
+        grid-column: #{$start} / #{$end + 1};
+      }
+    }
+  }
+}
+
+@include on-desktop {
+  @for $start from 1 through 12 {
+    @for $end from $start through 12 {
+      .grid__item--desktop-#{$start}-#{$end} {
+        grid-column: #{$start} / #{$end + 1};
+      }
+    }
+  }
+}

@@ -1,3 +1,15 @@
-body {
-  margin: 0;
-}
+@use 'blocks/page';
+@use 'blocks/grid';
+@use 'blocks/section';
+@use 'blocks/header';
+@use 'blocks/top-bar';
+@use 'blocks/menu';
+@use 'blocks/icon';
+@use 'blocks/nav';
+@use 'blocks/button';
+@use 'blocks/form';
+@use 'blocks/product';
+@use 'blocks/category';
+@use 'blocks/about';
+@use 'blocks/contacts';
+@use 'blocks/footer';
